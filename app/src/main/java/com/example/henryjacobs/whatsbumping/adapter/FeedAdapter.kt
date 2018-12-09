@@ -45,4 +45,11 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         var tvTimestamp = itemView.tvTimestamp
         var tvUsername = itemView.tvUsername
     }
+
+    fun setContent(allPosts: List<Post>){
+        postList = allPosts.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    
 }
