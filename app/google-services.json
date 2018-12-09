@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1008535887392",
+    "firebase_url": "https://whatsbumping.firebaseio.com",
+    "project_id": "whatsbumping",
+    "storage_bucket": "whatsbumping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008535887392:android:c8782c6299454466",
+        "android_client_info": {
+          "package_name": "com.example.henryjacobs.whatsbumping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008535887392-2afm88ir2e8ijeqe2bcq9ritqp29b72s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.henryjacobs.whatsbumping",
+            "certificate_hash": "5c5560aa41cf00309b1277af27fabdea47e84c78"
+          }
+        },
+        {
+          "client_id": "1008535887392-4fft1igqs2uocsn38spa0taidqbbhn3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxyR9DwEi6_jm1Kqlh1wQXQkmKhXt9Xtc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008535887392-4fft1igqs2uocsn38spa0taidqbbhn3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
