@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.activity_login.*
 
+
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,6 @@ class LoginActivity : AppCompatActivity() {
 //            Toast.makeText(this@LoginActivity,
 //                "Login error ${it.message}", Toast.LENGTH_LONG).show()
 //        }
-
 
     }
 
