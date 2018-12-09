@@ -23,4 +23,6 @@
             app:headerLayout="@layout/nav_header_feed"
             app:menu="@menu/activity_feed_drawer"/>
 
+
+
 </android.support.v4.widget.DrawerLayout>
