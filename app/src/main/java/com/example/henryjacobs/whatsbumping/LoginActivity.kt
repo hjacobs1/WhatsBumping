@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         ).addOnSuccessListener {
 
             // show main screen --> actually log the person in
-            //startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, FeedActivity::class.java))
 
         }.addOnFailureListener{
             Toast.makeText(this@LoginActivity,
