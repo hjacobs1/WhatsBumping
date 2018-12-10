@@ -6,14 +6,17 @@ import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.example.henryjacobs.whatsbumping.adapter.FeedAdapter
 import com.example.henryjacobs.whatsbumping.data.Post
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.app_bar_feed.*
 import kotlinx.android.synthetic.main.content_feed.*
+import kotlinx.android.synthetic.main.dialogue_follow.view.*
 
 class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -75,7 +78,8 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.nav_follow -> {
-
+                drawer_layout.closeDrawer(GravityCompat.START)
+                openFollowDialogue()
             }
             R.id.nav_post -> {
 
@@ -84,5 +88,31 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun openFollowDialogue(){
+        var builder = AlertDialog.Builder(this)
+        var bview = layoutInflater.inflate(R.layout.dialogue_follow, null)
+        builder.setTitle("Follow User")
+        builder.setView(bview)
+        var followAlert = builder.create()
+        setClickListeners(bview,followAlert)
+        followAlert.show()
+    }
+
+    private fun setClickListeners(bview: View,alert: AlertDialog) {
+        bview.btnCancel.setOnClickListener {
+            if (bview.etName.text.toString() != "") {
+                followUser(bview.etName.text.toString())
+            }
+            alert.dismiss()
+        }
+        bview.btnFollow.setOnClickListener {
+            alert.dismiss()
+        }
+    }
+
+    private fun followUser(name: String){
+        //TODO: implement follow user
     }
 }
