@@ -84,7 +84,6 @@ class LoginActivity : AppCompatActivity() {
 //                "Login error ${it.message}", Toast.LENGTH_LONG).show()
 //        }
 
-
     }
 
     private fun isFormValid(): Boolean {
@@ -122,6 +121,7 @@ class LoginActivity : AppCompatActivity() {
                 AuthenticationResponse.Type.ERROR -> {
                     Log.d("THE_TOKEN", response.error)
                 }
+
             }// Handle successful response
             // Handle error response
             // Most likely auth flow was cancelled
