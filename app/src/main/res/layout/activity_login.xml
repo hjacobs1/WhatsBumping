@@ -20,33 +20,6 @@
                    android:layout_marginBottom="24dp"
                    android:layout_gravity="center_horizontal" />
 
-        <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/etEmail"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
-                      android:text="demo@demo.hu"
-                      android:hint="email" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/etPassword"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:inputType="textPassword"
-                      android:text="123654"
-                      android:hint="Password"/>
-        </android.support.design.widget.TextInputLayout>
-
         <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
@@ -55,15 +28,7 @@
                 android:layout_marginBottom="12dp"
                 android:padding="12dp"
                 android:onClick="loginClick"
-                android:text="Login"/>
-
-        <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:onClick="registerClick"
-                android:text="Register"/>
+                android:text=" Login with Spotify"/>
 
     </LinearLayout>
 </ScrollView>

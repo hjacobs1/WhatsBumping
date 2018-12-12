@@ -6,19 +6,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.henryjacobs.whatsbumping.data.User
+import com.example.henryjacobs.whatsbumping.data.UserResult
+import com.example.henryjacobs.whatsbumping.network.UserAPI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import kotlinx.android.synthetic.main.activity_login.*
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationResponse
 import com.spotify.sdk.android.authentication.LoginActivity.REQUEST_CODE
-import com.neovisionaries.i18n.CountryCode;
-import com.wrapper.spotify.SpotifyApi;
-import com.wrapper.spotify.exceptions.SpotifyWebApiException;
-import com.wrapper.spotify.model_objects.specification.Paging;
-import com.wrapper.spotify.model_objects.specification.Track;
-import com.wrapper.spotify.requests.data.search.simplified.SearchTracksRequest;
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 
@@ -29,41 +32,24 @@ class LoginActivity : AppCompatActivity() {
     val REDIRECT_URI = "myapp://authresponse"
     val CLIENT_ID = "413f92986b554b8f91d2c0c407ca340b"
 
+    val HOST_URL = "https://api.spotify.com/"
+    var userAPI : UserAPI? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        initAPI()
     }
 
-    fun registerClick(v: View) {
-        if (!isFormValid()) {
-            return
-        }
-//        // needs a callback method so that you know this connection and msg to Firebase was successful or not
-//        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-//            etEmail.text.toString(), etPassword.text.toString()
-//        ).addOnSuccessListener {
-//            val user = it.user // firebase user
-//            user.updateProfile(
-//                UserProfileChangeRequest.Builder().
-//                    setDisplayName(userNameFromEmail(user.email!!)) // updating a profile
-//                    .build()
-//            )
-//            Toast.makeText(this@LoginActivity,
-//                "Registration OK", Toast.LENGTH_LONG).show()
-//
-//        }.addOnFailureListener{
-//            Toast.makeText(this@LoginActivity,
-//                "Register error ${it.message}", Toast.LENGTH_LONG).show()
-//        }
-
+    fun initAPI(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(HOST_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        userAPI = retrofit.create(UserAPI::class.java)
     }
 
     fun loginClick(v: View){
-        if (!isFormValid()) {
-            return
-        }
-// SPOTIFY STUFF
-//
         val builder = AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI)
 
         builder.setScopes(arrayOf("streaming"))
@@ -71,39 +57,13 @@ class LoginActivity : AppCompatActivity() {
 
         val token = AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request)
         Log.d("THE TOKEN", token.toString())
-//        // needs a callback method so that you know this connection and msg to Firebase was successful or not
-//        FirebaseAuth.getInstance().signInWithEmailAndPassword(
-//            etEmail.text.toString(), etPassword.text.toString()
-//        ).addOnSuccessListener {
-//
-//            // show main screen --> actually log the person in
-           //startActivity(Intent(this@LoginActivity, FeedActivity::class.java))
-//
-//        }.addOnFailureListener{
-//            Toast.makeText(this@LoginActivity,
-//                "Login error ${it.message}", Toast.LENGTH_LONG).show()
-//        }
 
-
-    }
-
-    private fun isFormValid(): Boolean {
-        return when {
-            etEmail.text.isEmpty() -> {
-                etEmail.error = "This field can not be empty"
-                false
-            }
-            etPassword.text.isEmpty() -> {
-                etPassword.error = "This field can not be empty"
-                false
-            }
-            else -> true
-        }
     }
 
     private fun userNameFromEmail(email: String) = email.substringBefore("@")
 
     //SPOTIFY STUFF
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
 
@@ -112,13 +72,32 @@ class LoginActivity : AppCompatActivity() {
             val response = AuthenticationClient.getResponse(resultCode, intent)
 
             when (response.type) {
-                // Response was successful and contains auth token
+            // Response was successful and contains auth token
                 AuthenticationResponse.Type.TOKEN -> {
                     Log.d("THE_TOKEN", response.accessToken)
+                    var token = response.accessToken
+                    val userCall = userAPI!!.getUserResults()
+                    userCall.enqueue(object : Callback<UserResult> {
 
+                        override fun onFailure(call: Call<UserResult>?, t: Throwable?) {
+                            Log.d("Failure",t!!.message)
+                            Toast.makeText(this@LoginActivity,"Failed to gather user data",Toast.LENGTH_LONG).show()
+                        }
+
+                        override fun onResponse(call: Call<UserResult>?, response: Response<UserResult>?) {
+                            val userResult = response?.body()
+                            var name = userResult?.display_name.toString()
+                            var email = userResult?.email.toString()
+                            if(name == null){
+                                name = "Ethan Hardacre"
+                                email = "hardacre.ethan@gmail.com"
+                            }
+                            registerUser(name,email)
+                        }
+                    })
                 }
 
-                // Auth flow returned an error
+            // Auth flow returned an error
                 AuthenticationResponse.Type.ERROR -> {
                     Log.d("THE_TOKEN", response.error)
                 }
@@ -127,6 +106,21 @@ class LoginActivity : AppCompatActivity() {
             // Most likely auth flow was cancelled
             // Handle other cases
         }
+    }
+
+    fun registerUser(name: String, email: String){
+        val user = User(name,email)
+        val userCollection = FirebaseFirestore.getInstance().collection("users")
+        userCollection.add(user).addOnSuccessListener {
+            Toast.makeText(this@LoginActivity, "Welcome, ${name}",Toast.LENGTH_LONG).show()
+            var intent = Intent(this@LoginActivity,FeedActivity::class.java)
+            intent.putExtra("email",email)
+            intent.putExtra("name",name)
+            startActivity(intent)
+        }.addOnFailureListener {
+            Toast.makeText(this@LoginActivity, "Sorry, there was a problem adding the new user",Toast.LENGTH_LONG).show()
+        }
+
     }
 
 }
