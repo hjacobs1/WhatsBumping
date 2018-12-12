@@ -13,9 +13,12 @@ import android.view.MenuItem
 import android.view.View
 import com.example.henryjacobs.whatsbumping.adapter.FeedAdapter
 import com.example.henryjacobs.whatsbumping.data.Post
+import com.example.henryjacobs.whatsbumping.data.User
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.app_bar_feed.*
 import kotlinx.android.synthetic.main.content_feed.*
+import kotlinx.android.synthetic.main.dialogue_follow.*
 import kotlinx.android.synthetic.main.dialogue_follow.view.*
 
 class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -108,11 +111,13 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             alert.dismiss()
         }
         bview.btnFollow.setOnClickListener {
+            followUser(bview.etName.text.toString())
             alert.dismiss()
         }
     }
 
     private fun followUser(name: String){
-        //TODO: implement follow user
+        //TODO implement follow user
+
     }
 }
