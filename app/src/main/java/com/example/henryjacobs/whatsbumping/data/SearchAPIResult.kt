@@ -1,75 +1,32 @@
 package com.example.henryjacobs.whatsbumping.data
-//
-//// result generated from /json
-//
-//data class @attr()
-//
-//data class Base(val results: Results?)
-//
-//data class Image1006917851(val #text: String?, val size: String?)
-//
-//data class Image1036265957(val #text: String?, val size: String?)
-//
-//data class Image1083550151(val #text: String?, val size: String?)
-//
-//data class Image1198503892(val #text: String?, val size: String?)
-//
-//data class Image1317811365(val #text: String?, val size: String?)
-//
-//data class Image1465742687(val #text: String?, val size: String?)
-//
-//data class Image1475605173(val #text: String?, val size: String?)
-//
-//data class Image1585279998(val #text: String?, val size: String?)
-//
-//data class Image167228454(val #text: String?, val size: String?)
-//
-//data class Image1850193510(val #text: String?, val size: String?)
-//
-//data class Image1900428038(val #text: String?, val size: String?)
-//
-//data class Image1953159737(val #text: String?, val size: String?)
-//
-//data class Image1960555943(val #text: String?, val size: String?)
-//
-//data class Image2041476923(val #text: String?, val size: String?)
-//
-//data class Image2080056147(val #text: String?, val size: String?)
-//
-//data class Image2137360081(val #text: String?, val size: String?)
-//
-//data class Image27270848(val #text: String?, val size: String?)
-//
-//data class Image339182221(val #text: String?, val size: String?)
-//
-//data class Image415441697(val #text: String?, val size: String?)
-//
-//data class Image419941815(val #text: String?, val size: String?)
-//
-//data class Image497655702(val #text: String?, val size: String?)
-//
-//data class Image502400014(val #text: String?, val size: String?)
-//
-//data class Image538589781(val #text: String?, val size: String?)
-//
-//data class Image654377456(val #text: String?, val size: String?)
-//
-//data class Image664078370(val #text: String?, val size: String?)
-//
-//data class Image695233035(val #text: String?, val size: String?)
-//
-//data class Image772476431(val #text: String?, val size: String?)
-//
-//data class Image873599172(val #text: String?, val size: String?)
-//
-//data class Image893004734(val #text: String?, val size: String?)
-//
-//data class Image92615223(val #text: String?, val size: String?)
-//
-//data class Opensearch:Query(val #text: String?, val role: String?, val startPage: String?)
-//
-//data class Results(val opensearch:Query: Opensearch:Query?, val opensearch:totalResults: String?, val opensearch:startIndex: String?, val opensearch:itemsPerPage: String?, val trackmatches: Trackmatches?, val @attr: @attr?)
-//
-//data class Track582623136(val name: String?, val artist: String?, val url: String?, val streamable: String?, val listeners: String?, val image: List<Image1475605173>?, val mbid: String?)
-//
-//data class Trackmatches(val track: List<Any>?)
+// result generated from /json
+
+data class Album(val album_type: String?, val artists: List<Artists1692225863>?, val external_urls: External_urls?, val href: String?, val id: String?, val images: List<Images1726777090>?, val name: String?, val release_date: String?, val release_date_precision: String?, val total_tracks: Number?, val type: String?, val uri: String?)
+
+data class Artists1291900308(val external_urls: External_urls?, val href: String?, val id: String?, val name: String?, val type: String?, val uri: String?)
+
+data class Artists1656398540(val external_urls: External_urls?, val href: String?, val id: String?, val name: String?, val type: String?, val uri: String?)
+
+data class Artists1692225863(val external_urls: External_urls?, val href: String?, val id: String?, val name: String?, val type: String?, val uri: String?)
+
+data class Artists439526594(val external_urls: External_urls?, val href: String?, val id: String?, val name: String?, val type: String?, val uri: String?)
+
+data class Artists548272483(val external_urls: External_urls?, val href: String?, val id: String?, val name: String?, val type: String?, val uri: String?)
+
+data class Artists96203421(val external_urls: External_urls?, val href: String?, val id: String?, val name: String?, val type: String?, val uri: String?)
+
+data class Base(val tracks: Tracks?)
+
+data class External_ids(val isrc: String?)
+
+data class External_urls(val spotify: String?)
+
+data class Images1105643849(val height: Number?, val url: String?, val width: Number?)
+
+data class Images1377820397(val height: Number?, val url: String?, val width: Number?)
+
+data class Images1726777090(val height: Number?, val url: String?, val width: Number?)
+
+data class Items387968569(val album: Album?, val artists: List<Artists96203421>?, val disc_number: Number?, val duration_ms: Number?, val explicit: Boolean?, val external_ids: External_ids?, val external_urls: External_urls?, val href: String?, val id: String?, val is_local: Boolean?, val is_playable: Boolean?, val name: String?, val popularity: Number?, val preview_url: String?, val track_number: Number?, val type: String?, val uri: String?)
+
+data class Tracks(val href: String?, val items: List<Any>?, val limit: Number?, val next: String?, val offset: Number?, val previous: Any?, val total: Number?)

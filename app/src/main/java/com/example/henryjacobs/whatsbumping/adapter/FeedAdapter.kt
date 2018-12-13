@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.henryjacobs.whatsbumping.R
 import com.example.henryjacobs.whatsbumping.data.Post
 import kotlinx.android.synthetic.main.row_feed.view.*
@@ -36,6 +37,8 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         holder.tvTimestamp.text = post.timeStamp
         holder.tvUsername.text = post.userName
         //TODO: set image view content (imgCover)
+        Glide.with(context).load(post.coverPhotoURL)
+            .into(holder.imgCover)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
