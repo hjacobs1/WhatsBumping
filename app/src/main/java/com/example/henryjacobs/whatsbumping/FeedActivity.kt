@@ -37,7 +37,9 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //TODO need to have a listener for when posts collection in firebase changes. Then need to get the objects from that collection and turn ethem into POST objects and add them to the adapter's list
         fab.setOnClickListener { view ->
-            startActivity(Intent(this, AddPostActivity::class.java).putExtra("name", userName))
+            startActivity(Intent(this, AddPostActivity::class.java)
+                .putExtra("name", userName)
+                )
         }
 
         val toggle = ActionBarDrawerToggle(

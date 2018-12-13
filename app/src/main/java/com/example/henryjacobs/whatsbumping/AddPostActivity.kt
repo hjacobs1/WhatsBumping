@@ -31,7 +31,7 @@ class AddPostActivity : AppCompatActivity() {
         userName = intent.getStringExtra("name")
 
         btnSearch.setOnClickListener {
-            adapter.searchResults.add(SearchResult("She Will", "Lil Wayne", "https://www.billboard.com/files/styles/article_main_image/public/stylus/1174239-Lil-Wayne-Deluxe-Edition-Cover-617x409.jpg"))
+            adapter.searchResults.add(SearchResult("She Will", "Lil Wayne", "https://thetwist03.files.wordpress.com/2011/08/51e0ughzytl-_sl500_aa300_.jpg?w=900"))
             adapter.searchResults.add(SearchResult("She Will Be Loved", "Maroon 5", "https://upload.wikimedia.org/wikipedia/en/b/be/Maroon_5_-_Songs_About_Jane.png"))
             searchResultsView.adapter = adapter
 

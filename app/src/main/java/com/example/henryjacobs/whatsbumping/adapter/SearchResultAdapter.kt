@@ -16,6 +16,7 @@ import com.example.henryjacobs.whatsbumping.data.Post
 import com.example.henryjacobs.whatsbumping.data.SearchResult
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.row_add_post_search.view.*
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -62,7 +63,7 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
 
             //TODO need to send whole object to firebase, we will have a onChangeListener in FeedActivity to catch these changes
             //TODO need to figure out how to get current user's ID from firebase and get name from other activity
-            val date = Date(System.currentTimeMillis()).toString()
+            var date = Date(System.currentTimeMillis()).toString()
             Log.d("WAS_CLICKED", "yes")
 
             var post = Post("userID","Ethan Hardacre", result.track, result.artist, result.coverPhotoURL, date)

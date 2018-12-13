@@ -32,11 +32,9 @@
                 android:layout_height="25dp"
                 android:id="@+id/tvSearchTrack"
                 card_view:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" android:textStyle="bold" android:textSize="18sp"
-                android:layout_marginEnd="8dp" card_view:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="8dp" card_view:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="8dp"/>
+                android:textStyle="bold" android:textSize="18sp"
+                android:layout_marginTop="8dp" card_view:layout_constraintStart_toEndOf="@+id/imgSearch"
+                android:layout_marginStart="16dp" android:layout_marginLeft="16dp"/>
 
         <TextView
                 android:text="Artist"
@@ -44,11 +42,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvSearchArtist"
                 card_view:layout_constraintTop_toBottomOf="@+id/tvSearchTrack"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" card_view:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                android:layout_marginBottom="8dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"/>
+                card_view:layout_constraintStart_toEndOf="@+id/imgSearch" android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"/>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
