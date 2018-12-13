@@ -10,4 +10,4 @@ data class Followers(val href: Any?, val total: Number?)
 
 data class Images1208864268(val height: Any?, val url: String?, val width: Any?)
 
-data class User(val name: String, val email: String, val followers: List<String>)
+data class User(var name: String,var email: String)

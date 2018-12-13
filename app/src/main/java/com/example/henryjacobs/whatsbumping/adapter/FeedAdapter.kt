@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.row_feed.view.*
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     var postList = mutableListOf<Post>()
+    var postKeys = mutableListOf<String>()
 
     val context : Context
     constructor(context: Context):super(){
@@ -46,10 +47,19 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         var tvUsername = itemView.tvUsername
     }
 
-    fun setContent(allPosts: List<Post>){
-        postList = allPosts.toMutableList()
+//    fun setContent(allPosts: List<Post>){
+//        postList = allPosts.toMutableList()
+//        notifyDataSetChanged()
+//    }
+
+    fun addPost(post: Post, key: String) {
+
+        postList.add(post)
+        postKeys.add(key)
         notifyDataSetChanged()
     }
+
+
 
     
 }

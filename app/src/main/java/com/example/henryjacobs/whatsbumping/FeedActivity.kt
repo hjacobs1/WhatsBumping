@@ -11,10 +11,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.example.henryjacobs.whatsbumping.adapter.FeedAdapter
 import com.example.henryjacobs.whatsbumping.data.Post
-import com.example.henryjacobs.whatsbumping.data.User
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.app_bar_feed.*
 import kotlinx.android.synthetic.main.content_feed.*
@@ -26,6 +26,9 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var adapter = FeedAdapter(this)
 
     var userId = "18fnc093ksk1"
+
+    //private lateinit var feedAdapter: FeedAdapter
+    private lateinit var postsListener: ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,40 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         feedView.adapter = adapter
 
+        listenForPosts()
+
+    }
+
+    fun listenForPosts(){
+        val db = FirebaseFirestore.getInstance()
+        val postsCollection = db.collection("posts")
+
+        postsListener = postsCollection.addSnapshotListener(object: EventListener<QuerySnapshot> {
+            override fun onEvent(querySnapshot: QuerySnapshot?, p1: FirebaseFirestoreException?) {
+
+                if (p1 != null) {  // if there was an error b/c p1 is an error argument
+                    Toast.makeText(this@FeedActivity, "Error: ${p1.message}",
+                        Toast.LENGTH_LONG).show()
+                    return
+                }
+
+                // check all items in snapshot of db and see their status
+                for (docChange in querySnapshot!!.getDocumentChanges()) {
+                    when (docChange.type) {
+                        DocumentChange.Type.ADDED -> {
+                            val post = docChange.document.toObject(Post::class.java)
+                            adapter.addPost(post, docChange.document.id)
+                        }
+                        DocumentChange.Type.MODIFIED -> {
+
+                        }
+                        DocumentChange.Type.REMOVED -> {
+
+                        }
+                    }
+                }
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -118,6 +155,7 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun followUser(name: String){
         //TODO implement follow user
-
+        val dbin = FirebaseFirestore.getInstance().collection("users").get()
+        println(dbin)
     }
 }
