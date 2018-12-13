@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationResponse
 import com.spotify.sdk.android.authentication.LoginActivity.REQUEST_CODE
+import com.squareup.okhttp.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,6 +82,18 @@ class LoginActivity : AppCompatActivity() {
                 AuthenticationResponse.Type.TOKEN -> {
                     Log.d("THE_TOKEN", response.accessToken)
                     token = response.accessToken
+
+                    var httpClient = OkHttpClient.Builder()
+                    httpClient.addInterceptor { chain ->
+                        var original = chain.request()
+                        var request = original.newBuilder()
+                            .addHeader("Accept","application/json")
+                                .addHeader("Content-Type","application/json")
+                                .addHeader("Authorization", "Bearer ${token}")
+                                .method(original.method(),original.body())
+                                .build()
+                        chain.proceed(request)
+                    }
                     val userCall = userAPI!!.getUserResults()
                     userCall.enqueue(object : Callback<UserResult> {
 
@@ -91,10 +106,11 @@ class LoginActivity : AppCompatActivity() {
                             val userResult = response?.body()
                             var name = userResult?.display_name.toString()
                             var email = userResult?.email.toString()
-                            if(name == null){
-                                name = "Ethan Hardacre"
-                                email = "hardacre.ethan@gmail.com"
-                            }
+                            
+//                            if(name == null){
+//                                name = "Ethan Hardacre"
+//                                email = "hardacre.ethan@gmail.com"
+//                            }
                             registerUser(name,email)
                         }
                     })
@@ -112,8 +128,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun registerUser(name: String, email: String){
-        var list = mutableListOf<String>()
-        val user = User(name,email, list)
+        var user = User(name,email)
         val userCollection = FirebaseFirestore.getInstance().collection("users")
         userCollection.add(user).addOnSuccessListener {
             Toast.makeText(this@LoginActivity, "Welcome, ${name}",Toast.LENGTH_LONG).show()
