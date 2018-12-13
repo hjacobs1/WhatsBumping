@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
             val response = AuthenticationClient.getResponse(resultCode, intent)
 
             when (response.type) {
-            // Response was successful and contains auth token
+                // Response was successful and contains auth token
                 AuthenticationResponse.Type.TOKEN -> {
                     Log.d("THE_TOKEN", response.accessToken)
                     token = response.accessToken
@@ -88,10 +88,10 @@ class LoginActivity : AppCompatActivity() {
                         var original = chain.request()
                         var request = original.newBuilder()
                             .addHeader("Accept","application/json")
-                                .addHeader("Content-Type","application/json")
-                                .addHeader("Authorization", "Bearer ${token}")
-                                .method(original.method(),original.body())
-                                .build()
+                            .addHeader("Content-Type","application/json")
+                            .addHeader("Authorization", "Bearer ${token}")
+                            .method(original.method(),original.body())
+                            .build()
                         chain.proceed(request)
                     }
                     val userCall = userAPI!!.getUserResults()
@@ -116,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
                     })
                 }
 
-            // Auth flow returned an error
+                // Auth flow returned an error
                 AuthenticationResponse.Type.ERROR -> {
                     Log.d("THE_TOKEN", response.error)
                 }

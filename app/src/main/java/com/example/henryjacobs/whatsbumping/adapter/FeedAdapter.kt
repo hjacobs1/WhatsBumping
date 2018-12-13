@@ -36,9 +36,8 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         var post = postList[position]
         holder.tvTrack.text = post.track
         holder.tvArtist.text = post.artist
-        holder.tvTimestamp.text = ((time - post.timeStamp.toLong())/60000).toString() + "min ago"
+        holder.tvTimestamp.text = ((time - post.timeStamp.toLong())/60000).toString() + context.getString(R.string.min_ago)
         holder.tvUsername.text = post.userName
-        //TODO: set image view content (imgCover)
         Glide.with(context).load(post.coverPhotoURL)
             .into(holder.imgCover)
     }
@@ -50,11 +49,6 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         var tvTimestamp = itemView.tvTimestamp
         var tvUsername = itemView.tvUsername
     }
-
-//    fun setContent(allPosts: List<Post>){
-//        postList = allPosts.toMutableList()
-//        notifyDataSetChanged()
-//    }
 
     fun addPost(post: Post, key: String) {
 

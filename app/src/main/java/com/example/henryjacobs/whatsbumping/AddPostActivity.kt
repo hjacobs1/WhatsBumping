@@ -23,7 +23,6 @@ class AddPostActivity : AppCompatActivity() {
     val adapter = SearchResultAdapter(this)
     lateinit var userName: String
 
-    //TODO have to add handling of spaces in track name search ex: XO TOUR LIiF3 --> XO%20TOUR%20LIiF3
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
@@ -31,8 +30,10 @@ class AddPostActivity : AppCompatActivity() {
         userName = intent.getStringExtra("name")
 
         btnSearch.setOnClickListener {
-            adapter.searchResults.add(SearchResult("She Will", "Lil Wayne", "https://thetwist03.files.wordpress.com/2011/08/51e0ughzytl-_sl500_aa300_.jpg?w=900"))
-            adapter.searchResults.add(SearchResult("She Will Be Loved", "Maroon 5", "https://upload.wikimedia.org/wikipedia/en/b/be/Maroon_5_-_Songs_About_Jane.png"))
+            adapter.searchResults.add(SearchResult(getString(R.string.search_title1), getString(R.string.search_artist1), getString(
+                            R.string.search_img_url1)))
+            adapter.searchResults.add(SearchResult(getString(R.string.search_title2), getString(R.string.search_artist2), getString(
+                            R.string.search_img_url2)))
             searchResultsView.adapter = adapter
 
             //adapter.notifyDataSetChanged()
@@ -57,9 +58,5 @@ class AddPostActivity : AppCompatActivity() {
 //                }
 //            })
         }
-
-        //TODO use search button here, get result, set the list based on that
     }
-
-    //TODO need a function that converts JSON result of api call to SearchResult objects, these are used in the adapter
 }

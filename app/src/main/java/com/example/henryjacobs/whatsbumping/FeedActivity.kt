@@ -25,10 +25,8 @@ import kotlinx.android.synthetic.main.dialogue_follow.view.*
 class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     var adapter = FeedAdapter(this)
-
     var userId = "18fnc093ksk1"
 
-    //private lateinit var feedAdapter: FeedAdapter
     private lateinit var postsListener: ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +37,6 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var intent = getIntent()
         var userName = intent.getStringExtra("name")
 
-        //TODO need to have a listener for when posts collection in firebase changes. Then need to get the objects from that collection and turn ethem into POST objects and add them to the adapter's list
         fab.setOnClickListener { view ->
             startActivity(Intent(this, AddPostActivity::class.java)
                 .putExtra("name", userName)
@@ -100,27 +97,18 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        when (item.itemId) {
-//            //R.id.action_settings -> return true
-//            else -> return super.onOptionsItemSelected(item)
-//        }
         return false
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
                 var intent = Intent(this@FeedActivity,UserActivity::class.java)
-                intent.putExtra("userID",userId)
+                intent.putExtra(getString(R.string.uid_put_extra),userId)
                 startActivity(intent)
             }
             R.id.nav_follow -> {
@@ -139,7 +127,7 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun openFollowDialogue(){
         var builder = AlertDialog.Builder(this)
         var bview = layoutInflater.inflate(R.layout.dialogue_follow, null)
-        builder.setTitle("Follow User")
+        builder.setTitle(getString(R.string.follow_user))
         builder.setView(bview)
         var followAlert = builder.create()
         setClickListeners(bview,followAlert)

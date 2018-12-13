@@ -10,4 +10,27 @@
     <string name="enter_a_track_name">Enter a track name</string>
     <string name="search">Search</string>
     <string name="search_results">Search Results:</string>
+    <string name="min_ago">min ago</string>
+    <string name="uid">userID</string>
+    <string name="ethan">Ethan Hardacre</string>
+    <string name="successful_post">You posted to the feed</string>
+    <string name="failed_post">Sorry, there was a problem adding the new user</string>
+    <string name="spotify_api_host">https://api.spotify.com/</string>
+    <string name="api_key">d8416289a275514ed0b5ab828b1f79e9</string>
+    <string name="search_title1">She Will</string>
+    <string name="search_artist1">Lil Wayne</string>
+    <string name="search_img_url1">https://thetwist03.files.wordpress.com/2011/08/51e0ughzytl-_sl500_aa300_.jpg?w=900
+    </string>
+    <string name="search_title2">She Will Be Loved</string>
+    <string name="search_artist2">Maroon 5</string>
+    <string name="search_img_url2">https://upload.wikimedia.org/wikipedia/en/b/be/Maroon_5_-_Songs_About_Jane.png
+    </string>
+    <string name="current_uid">18fnc093ksk1</string>
+    <string name="uid_put_extra">userID</string>
+    <string name="follow_user">Follow User</string>
+    <string name="redirect_uri">myapp://authresponse</string>
+    <string name="client_ID">413f92986b554b8f91d2c0c407ca340b</string>
+    <string name="host_url">https://api.spotify.com/</string>
+    <string name="login_fail">Failed to gather user data</string>
+    <string name="fail">Failure</string>
 </resources>

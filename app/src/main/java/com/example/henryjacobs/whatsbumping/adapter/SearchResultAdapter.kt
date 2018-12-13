@@ -52,34 +52,24 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
 
         holder.tvSearchArtist.text = result.artist
 
-        //TODO use glide library to load in image
         Glide.with(context).load(result.coverPhotoURL)
             .into(holder.imgSearch)
 
 
 
         holder.itemView.setOnClickListener{
-
-            //TODO need to send whole object to firebase, we will have a onChangeListener in FeedActivity to catch these changes
-            //TODO need to figure out how to get current user's ID from firebase and get name from other activity
             val time = System.currentTimeMillis().toString()
-            Log.d("WAS_CLICKED", "yes")
-
-            var post = Post("userID","Ethan Hardacre", result.track, result.artist, result.coverPhotoURL, time)
+            var post = Post(context.getString(R.string.uid),context.getString(R.string.ethan), result.track, result.artist, result.coverPhotoURL, time)
             val postCollection = FirebaseFirestore.getInstance().collection("posts")
             postCollection.add(post).addOnSuccessListener {
-                //TODO can't tell if this is working because can't connect to firebase
-                Toast.makeText(context, "You posted to the feed", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.successful_post), Toast.LENGTH_LONG).show()
                 var intent = Intent(context,FeedActivity::class.java)
                 context.startActivity(intent)
             }.addOnFailureListener {
-
-                Toast.makeText(context, "Sorry, there was a problem adding the new user",Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.failed_post),Toast.LENGTH_LONG).show()
             }
         }
     }
-
-
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val tvSearchTrack = itemView.tvSearchTrack
