@@ -53,7 +53,6 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
         feedView.adapter = adapter
 
         listenForPosts()

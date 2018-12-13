@@ -63,10 +63,12 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
 
             //TODO need to send whole object to firebase, we will have a onChangeListener in FeedActivity to catch these changes
             //TODO need to figure out how to get current user's ID from firebase and get name from other activity
-            var date = Date(System.currentTimeMillis()).toString()
-            Log.d("WAS_CLICKED", "yes")
+            var date = Date(System.currentTimeMillis())
+            val format = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            var dateString = format.format(date)
+            Log.d("WAS_CLICKED", date.toString())
 
-            var post = Post("userID","Ethan Hardacre", result.track, result.artist, result.coverPhotoURL, date)
+            var post = Post("userID","Ethan Hardacre", result.track, result.artist, result.coverPhotoURL, dateString)
             val postCollection = FirebaseFirestore.getInstance().collection("posts")
             postCollection.add(post).addOnSuccessListener {
                 //TODO can't tell if this is working because can't connect to firebase

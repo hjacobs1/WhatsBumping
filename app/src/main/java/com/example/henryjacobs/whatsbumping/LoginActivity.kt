@@ -107,10 +107,10 @@ class LoginActivity : AppCompatActivity() {
                             var name = userResult?.display_name.toString()
                             var email = userResult?.email.toString()
                             
-//                            if(name == null){
-//                                name = "Ethan Hardacre"
-//                                email = "hardacre.ethan@gmail.com"
-//                            }
+                            if(name == null || email == null || userResult == null){
+                                name = "Ethan Hardacre"
+                                email = "hardacre.ethan@gmail.com"
+                            }
                             registerUser(name,email)
                         }
                     })
