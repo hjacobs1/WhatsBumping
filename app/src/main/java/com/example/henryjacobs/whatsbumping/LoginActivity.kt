@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
                             val userResult = response?.body()
                             var name = userResult?.display_name.toString()
                             var email = userResult?.email.toString()
-                            
+                            Log.d("RES_",response?.body().toString())
                             if(name == null || email == null || userResult == null){
                                 name = "Ethan Hardacre"
                                 email = "hardacre.ethan@gmail.com"

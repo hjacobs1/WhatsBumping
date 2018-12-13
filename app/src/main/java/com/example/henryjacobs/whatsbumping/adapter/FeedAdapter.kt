@@ -32,10 +32,11 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var time = System.currentTimeMillis()
         var post = postList[position]
         holder.tvTrack.text = post.track
         holder.tvArtist.text = post.artist
-        holder.tvTimestamp.text = post.timeStamp
+        holder.tvTimestamp.text = ((time - post.timeStamp.toLong())/60000).toString() + "min ago"
         holder.tvUsername.text = post.userName
         //TODO: set image view content (imgCover)
         Glide.with(context).load(post.coverPhotoURL)
