@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.henryjacobs.whatsbumping.data.Followers
 import com.example.henryjacobs.whatsbumping.data.User
 import com.example.henryjacobs.whatsbumping.data.UserResult
 import com.example.henryjacobs.whatsbumping.network.UserAPI
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     val HOST_URL = "https://api.spotify.com/"
     var userAPI : UserAPI? = null
+    lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun loginClick(v: View){
+        //startActivity(Intent(this@LoginActivity, FeedActivity::class.java).putExtra("name", "Ethan Hardacre"))
         val builder = AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI)
 
         builder.setScopes(arrayOf("streaming"))
@@ -75,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
             // Response was successful and contains auth token
                 AuthenticationResponse.Type.TOKEN -> {
                     Log.d("THE_TOKEN", response.accessToken)
-                    var token = response.accessToken
+                    token = response.accessToken
                     val userCall = userAPI!!.getUserResults()
                     userCall.enqueue(object : Callback<UserResult> {
 
@@ -109,7 +112,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun registerUser(name: String, email: String){
-        val user = User(name,email)
+        var list = mutableListOf<String>()
+        val user = User(name,email, list)
         val userCollection = FirebaseFirestore.getInstance().collection("users")
         userCollection.add(user).addOnSuccessListener {
             Toast.makeText(this@LoginActivity, "Welcome, ${name}",Toast.LENGTH_LONG).show()

@@ -2,14 +2,23 @@ package com.example.henryjacobs.whatsbumping.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.example.henryjacobs.whatsbumping.FeedActivity
 import com.example.henryjacobs.whatsbumping.R
 import com.example.henryjacobs.whatsbumping.data.Post
 import com.example.henryjacobs.whatsbumping.data.SearchResult
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.row_add_post_search.view.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
     var searchResults = mutableListOf<SearchResult>()
@@ -44,17 +53,29 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
         holder.tvSearchArtist.text = result.artist
 
         //TODO use glide library to load in image
-//        Glide.with(this@DetailsActivity) .load(
-//            (getString(R.string.weather_icon_url) + response.body()?.weather?.get(0)?.icon + getString(R.string.png_extension)))
-//            .into(holder.imgSearch)
+        Glide.with(context).load(result.coverPhotoURL)
+            .into(holder.imgSearch)
 
 
 
         holder.itemView.setOnClickListener{
+
             //TODO need to send whole object to firebase, we will have a onChangeListener in FeedActivity to catch these changes
-//            var intentDetails = Intent(context, DetailsActivity::class.java)
-//            intentDetails.putExtra(context.getString(R.string.key_city), cityItems[holder.adapterPosition].cityName)
-//            context.startActivity(intentDetails)
+            //TODO need to figure out how to get current user's ID from firebase and get name from other activity
+            val date = Date(System.currentTimeMillis()).toString()
+            Log.d("WAS_CLICKED", "yes")
+
+            var post = Post("userID","Ethan Hardacre", result.track, result.artist, result.coverPhotoURL, date)
+            val postCollection = FirebaseFirestore.getInstance().collection("posts")
+            postCollection.add(post).addOnSuccessListener {
+                //TODO can't tell if this is working because can't connect to firebase
+                Toast.makeText(context, "You posted to the feed", Toast.LENGTH_LONG).show()
+                var intent = Intent(context,FeedActivity::class.java)
+                context.startActivity(intent)
+            }.addOnFailureListener {
+
+                Toast.makeText(context, "Sorry, there was a problem adding the new user",Toast.LENGTH_LONG).show()
+            }
         }
     }
 
