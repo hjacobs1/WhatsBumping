@@ -62,6 +62,14 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         notifyDataSetChanged()
     }
 
+    fun removePostByKey(key: String) {
+        val index = postKeys.indexOf(key)
+        if (index != -1){
+            postList.removeAt(index)
+            postKeys.removeAt(index)
+            notifyItemRemoved(index)
+        }
+    }
 
 
     

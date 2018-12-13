@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -63,7 +64,6 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         postsListener = postsCollection.addSnapshotListener(object: EventListener<QuerySnapshot> {
             override fun onEvent(querySnapshot: QuerySnapshot?, p1: FirebaseFirestoreException?) {
-
                 if (p1 != null) {  // if there was an error b/c p1 is an error argument
                     Toast.makeText(this@FeedActivity, "Error: ${p1.message}",
                         Toast.LENGTH_LONG).show()
@@ -75,13 +75,14 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     when (docChange.type) {
                         DocumentChange.Type.ADDED -> {
                             val post = docChange.document.toObject(Post::class.java)
+
                             adapter.addPost(post, docChange.document.id)
                         }
                         DocumentChange.Type.MODIFIED -> {
 
                         }
                         DocumentChange.Type.REMOVED -> {
-
+                            adapter.removePostByKey(docChange.document.id)
                         }
                     }
                 }
@@ -159,7 +160,6 @@ class FeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun followUser(name: String){
         //TODO implement follow user
-        val dbin = FirebaseFirestore.getInstance().collection("users").get()
-        println(dbin)
+        val dbin = FirebaseFirestore.getInstance().collection("users")
     }
 }
