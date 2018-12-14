@@ -108,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
                             var email = userResult?.email.toString()
                             Log.d("RES_",response?.body().toString())
                             if(name == null || email == null || userResult == null){
-                                name = "Ethan Hardacre"
+                                name = "Henry Jacobs"
                                 email = "hardacre.ethan@gmail.com"
                             }
                             registerUser(name,email)

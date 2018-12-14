@@ -28,7 +28,7 @@
                 card_view:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
         />
         <TextView
-                android:text="Track Title"
+                android:text="@string/track_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTrack"
@@ -36,7 +36,7 @@
                 card_view:layout_constraintStart_toEndOf="@+id/imgCover" android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp" android:textStyle="bold" android:textSize="18sp"/>
         <TextView
-                android:text="User Name"
+                android:text="@string/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvUsername"
@@ -44,14 +44,14 @@
                 card_view:layout_constraintStart_toEndOf="@+id/imgCover" android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"/>
         <TextView
-                android:text="TimeStamp"
+                android:text="@string/timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTimestamp"
                 card_view:layout_constraintTop_toTopOf="parent" card_view:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginTop="8dp"/>
         <TextView
-                android:text="Artist"
+                android:text="@string/artist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvArtist"

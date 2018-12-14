@@ -33,4 +33,15 @@
     <string name="host_url">https://api.spotify.com/</string>
     <string name="login_fail">Failed to gather user data</string>
     <string name="fail">Failure</string>
+    <string name="username">UserName</string>
+    <string name="cancel">Cancel</string>
+    <string name="follow">Follow</string>
+    <string name="track_title">Track Title</string>
+    <string name="user_name">User Name</string>
+    <string name="timestamp">TimeStamp</string>
+    <string name="artist">Artist</string>
+    <string name="create_post">Create Post</string>
+    <string name="social">Social</string>
+    <string name="find_friends">Find Friends</string>
+    <string name="profile">Profile</string>
 </resources>
